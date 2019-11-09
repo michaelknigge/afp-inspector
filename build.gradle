@@ -1,0 +1,72 @@
+defaultTasks 'clean', 'javadoc', 'test', 'check', 'checkstyleMain', 'checkstyleTest', 'assemble', 'jfxNative'
+
+buildscript {
+    dependencies {
+        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.8.2'
+    }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'javafx-gradle-plugin'
+    apply plugin: 'checkstyle'
+    apply plugin: 'findbugs'
+
+    dependencies {
+        compile group: 'org.controlsfx', name: 'controlsfx', version: '8.40.15'
+    }
+
+    version = "0.1"
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+
+    checkstyle {
+        toolVersion = "6.0"
+        configFile = new File(rootDir, "config/checkstyle.xml")
+    }
+
+    javadoc {
+        options.encoding = 'UTF-8'
+    }
+
+    jfx {
+        verbose = true
+
+        nativeReleaseVersion = "${project.version}"
+
+        appName = "AFP-Inspector"
+
+        // minimal requirement for jfxJar-task
+        mainClass = 'de.textmode.afpinspector.Main'
+    
+        // minimal requirement for jfxNative-task
+        vendor = 'Michael Knigge'
+    }
+
+    jar {
+        manifest {
+            attributes("Specification-Title": "AFP-Inspector",
+                 "Implementation-Title": "AFP-Inspector",
+                 "Implementation-Version": version,
+                 "Implementation-Vendor": "https://github.com/michaelknigge/afp-inspector",
+                 "Created-By": System.getProperty('java.version') + ' (' + System.getProperty('java.vendor') + ')',
+                 "Class-Path": configurations.compile.collect { it.getName() }.join(' '))
+        }
+    }
+}
