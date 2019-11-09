@@ -36,9 +36,23 @@ subprojects {
         targetCompatibility = '1.8'
     }
 
+    configurations {
+        checkstyleConfig
+    }
+
+    dependencies {
+        checkstyleConfig ("com.puppycrawl.tools:checkstyle:7.1") {
+            transitive = false
+        }
+    }    
+
     checkstyle {
-        toolVersion = "6.0"
+        toolVersion = '7.1'
         configFile = new File(rootDir, "config/checkstyle.xml")
+    }
+
+    findbugs {
+        excludeFilter = file("$rootProject.projectDir/config/excludeFilter.xml")
     }
 
     javadoc {

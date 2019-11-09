@@ -1,0 +1,7 @@
+<FindBugsFilter>
+  <Match>
+    <Class name="de.textmode.afpinspector.Main" />
+    <Method name="handleQuitApplication" />
+    <Bug pattern="DM_EXIT" />
+  </Match>
+</FindBugsFilter>
