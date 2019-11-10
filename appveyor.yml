@@ -1,0 +1,5 @@
+version: 0.1.{build}
+build_script:
+- cmd: gradlew.bat
+artifacts:
+- path: '*.exe'
