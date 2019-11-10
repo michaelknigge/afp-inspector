@@ -9,6 +9,4 @@ script:
 
 install:
   - sudo apt update
-  - sudo apt-cache search jfx
-  - sudo apt-cache search javafx
   - sudo apt install openjfx fakeroot rpm

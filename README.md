@@ -1,4 +1,4 @@
-# afp-inspector
+# afp-inspector [![Build Status](https://travis-ci.org/michaelknigge/afp-inspector.svg?branch=master)](https://travis-ci.org/michaelknigge/afp-inspector)
 
 JavaFX application for analysis of [AFP](https://en.wikipedia.org/wiki/Advanced_Function_Presentation) ([MO:DCA](https://en.wikipedia.org/wiki/MODCA)) files.
 
